@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "rest-project"
+version = "0.1.0"
+description = "REST API project, with methds: CRUD users, get weather, check memory"
+authors = ["Dmitry Lvovich Grachev <grdmitriyl@gmail.com>"]
+readme = "README.md"
+packages = [{include = "rest_project"}]
+
+[tool.poetry.dependencies]
+python = "3.10.9"
+Django = "4.1.7"
+djangorestframework = "3.14.0"
+djangorestframework-simplejwt = "5.2.2"
+pillow = "9.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
