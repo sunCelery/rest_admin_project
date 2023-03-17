@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics
 
-from .models import User
-from .serializer import UserSerializer
+from .models import Client
+from .serializer import ClientSerializer
 
 
 def api_methods(request):
@@ -11,6 +11,6 @@ def api_methods(request):
         'API methods list: not Implemented yet'
     )
 
-class UserAPIView(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class ClientAPIView(generics.ListAPIView):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer

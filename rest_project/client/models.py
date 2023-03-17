@@ -1,13 +1,13 @@
 from django.db import models
 
 
-def user_dir_path(instance, filename):
-    '''file will be uploaded to MEDIA_ROOT / user_<id>/<filename>'''
-    return f'user_{instance.user.id}/{filename}'
+def client_dir_path(instance, filename):
+    '''file will be uploaded to MEDIA_ROOT / client_<id>/<filename>'''
+    return f'client_{instance.client.id}/{filename}'
 
 
-class User(models.Model):
-    '''User class db'''
+class Client(models.Model):
+    '''Client class db'''
     name = models.CharField(max_length=32)
     surname = models.CharField(max_length=64)
     SEX_CHOICES = (
@@ -32,4 +32,4 @@ class User(models.Model):
 
 class Photo(models.Model):
     '''Separate db for photos'''
-    photo = models.ImageField(upload_to=user_dir_path)
+    photo = models.ImageField(upload_to=client_dir_path)
