@@ -1,16 +1,17 @@
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 
+
+
 # def client_dir_path(instance, filename):
-#     '''file will be uploaded to MEDIA_ROOT / client_<id>/<filename>'''
+#     """file will be uploaded to MEDIA_ROOT / client_<id>/<filename>"""
 #     return f'client_{instance.client.id}/{filename}'
 
 
-# class Client(models.Model):
 
 class Client(models.Model):
-    '''Client db'''
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    """Client db"""
     name = models.CharField(max_length=32, blank=True)
     surname = models.CharField(max_length=64, blank=True)
     SEX_CHOICES = (

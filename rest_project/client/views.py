@@ -3,19 +3,20 @@ from django.forms import model_to_dict
 from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics, viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.contrib.auth.models import User
 
 from .models import Client
 from .permissions import IsOwnerOrReadOnly
-from .serializer import ClientSerializer
+from .serializer import ClientSerializer, RegisterSerializer
 
 
-# class ClientAPIList(generics.ListAPIView):
-#     """Returns list of clients JSON"""
-#     queryset = Client.objects.all()
-#     serializer_class = ClientSerializer
+class ClientAPIRegistrationView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    permission_classes = (AllowAny, )
+    serializer_class = RegisterSerializer
 
 
 class ClientAPIView(APIView):
@@ -37,15 +38,15 @@ class ClientAPIView(APIView):
             )
             return response
 
-    def post(self, request):
-        serializer = ClientSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        response = Response(
-            {'client created': serializer.data}
-        )
-        return response
+    # def post(self, request):
+    #     serializer = ClientSerializer(data=request.data)
+    #     serializer.is_valid(raise_exception=True)
+    #     serializer.save()
+    #
+    #     response = Response(
+    #         {'client created': serializer.data}
+    #     )
+    #     return response
 
     def patch(self, request, *args, **kwargs):
         """
