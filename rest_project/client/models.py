@@ -39,7 +39,7 @@ class Client(models.Model):
         )
     birth_date = models.DateField(blank=True)
     photo = models.ImageField(
-        upload_to=client_dir_path,
+        upload_to='uploads/',
         blank=True,
     )
 
