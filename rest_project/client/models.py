@@ -1,8 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
-
-
+from django_resized import ResizedImageField
 
 def client_dir_path(instance, filename):
     """file will be uploaded to MEDIA_ROOT /client_<id>/<filename>"""
@@ -38,10 +37,17 @@ class Client(models.Model):
         blank='NULL',
         )
     birth_date = models.DateField(blank=True)
-    photo = models.ImageField(
+
+    photo = ResizedImageField(
         upload_to='uploads/',
         blank=True,
+        size=[600, 600],
     )
+
+    # photo = models.ImageField(
+    #     upload_to='uploads/',
+    #     blank=True,
+    # )
 
 
 
