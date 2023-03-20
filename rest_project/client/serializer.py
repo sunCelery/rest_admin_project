@@ -11,7 +11,7 @@ from .models import Client, CustomUser
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
-        fields = ('sex', 'birth_date')
+        fields = ('birth_date', 'sex', 'photo')
 
 
 class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
@@ -41,7 +41,7 @@ class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
         profile.sex = profile_data.get('sex', profile.sex)
         profile.birth_date = profile_data.get('birth_date', profile.birth_date)
         profile.address = profile_data.get('address', profile.address)
-        # profile.photo = profile_data.get('photo', profile.photo)
+        profile.photo = profile_data.get('photo', profile.photo)
         profile.save()
 
         return instance

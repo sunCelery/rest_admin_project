@@ -4,9 +4,10 @@ from django.contrib.auth.models import AbstractUser
 
 
 
-# def client_dir_path(instance, filename):
-#     """file will be uploaded to MEDIA_ROOT / client_<id>/<filename>"""
-#     return f'client_{instance.client.id}/{filename}'
+def client_dir_path(instance, filename):
+    """file will be uploaded to MEDIA_ROOT /client_<id>/<filename>"""
+    return f'uploads/'
+    # {instance.user.id}    {filename}
 
 
 class CustomUser(AbstractUser):
@@ -34,15 +35,14 @@ class Client(models.Model):
         max_length=1,
         choices=SEX_CHOICES,
         default='U',
-        blank=True,
+        blank='NULL',
         )
     birth_date = models.DateField(blank=True)
-    # photo = models.ForeignKey(
-    #     to='Photo',
-    #     on_delete=models.PROTECT,
-    #     blank=True,
-    #     null=True,
-    # )
+    photo = models.ImageField(
+        upload_to=client_dir_path,
+        blank=True,
+    )
+
 
 
 # class Photo(models.Model):
