@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 
 
@@ -9,11 +9,22 @@ from django.contrib.auth.models import User
 #     return f'client_{instance.client.id}/{filename}'
 
 
+class CustomUser(AbstractUser):
+    username = models.CharField(max_length=64, blank=True, null=True)
+    email = models.EmailField('email address', unique=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+
+    def __str__(self):
+        return "{}".format(self.email)
+
 
 class Client(models.Model):
     """Client db"""
-    name = models.CharField(max_length=32, blank=True)
-    surname = models.CharField(max_length=64, blank=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE,
+                                related_name='profile')
     SEX_CHOICES = (
         ('F', 'Female'),
         ('M', 'Male'),
@@ -33,8 +44,6 @@ class Client(models.Model):
     #     null=True,
     # )
 
-    def __str__(self):
-        return self.name
 
 # class Photo(models.Model):
 #     '''Separate db for photos'''
