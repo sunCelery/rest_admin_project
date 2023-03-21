@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 import requests
@@ -7,32 +8,55 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .exceptions import CityNotFoundOrNotGiven, DateNotGiven
 
-def get_coordinates(request: dict) -> dict:
+
+def get_coordinates(
+        request: dict,
+        number_of_cities_in_db: int = 42906) -> dict:
     """
     replaces "city" from request dictionary by
     appropriate "latitude" and "longitude"
+    because original API uses them
     """
     if 'city' in request:
         city = request['city']
         with open(Path('weather_api/data/cities.csv'), newline='') as csv_file:
-            print(csv_file.readline())
-            while True:
+            for _ in range(number_of_cities_in_db):
                 csv_line = csv_file.readline()
-                if city.capitalize() in csv_line:
+                pattern = r'^' + city + r'.*,'
+                if re.search(pattern, csv_line, re.IGNORECASE):
                     _, latitude, longitude = csv_line.split(',')
-                    break
-            coodrinates = {
-                'latitude': latitude.strip(),
-                'longitude': longitude.strip(),
-            }
-            del request['city']
-            request = {**request, **coodrinates}
-            print(f"{request=}")
+                    coordinates = {
+                        'latitude': latitude.strip(),
+                        'longitude': longitude.strip(),
+                    }
+                    del request['city']
+                    request = {**request, **coordinates}
+                    return request
+
+    raise CityNotFoundOrNotGiven
+
+
+def get_date(request: dict) -> dict:
+    """
+    replaces "date" from request dictionary by
+    appropriate "start_date" and "end_date"
+    because original API uses them
+    """
+    if 'date' in request:
+        date = request['date'].strip()
+        dates = {
+            'start_date': date,
+            'end_date': date,
+        }
+        del request['date']
+        request = {**request, **dates}
         return request
 
     else:
-        return request
+        raise DateNotGiven
+
 
 
 class WeatherAPIView(APIView):
@@ -42,25 +66,30 @@ class WeatherAPIView(APIView):
     def get(self, request):
         url = 'https://archive-api.open-meteo.com/v1/era5'
         payload = {
-            # 'latitude': 52.2,
-            # 'longitude': 13.2,
-            'start_date': '2021-01-01',
-            'end_date': '2021-01-01',
             'daily': 'temperature_2m_max',
             'timezone': settings.TIME_ZONE,
         }
-        payload = {**payload.copy(), **get_coordinates(request.data)}
+        try:
+            payload = {
+                **payload.copy(),
+                **get_coordinates(request.data),
+                **get_date(request.data),
+            }
+            response = requests.get(url, params=payload)
+            response = Response(response.json())
+            return response
 
+        except CityNotFoundOrNotGiven:
+            response = {
+                'error': '"city" not given or there is no such city '
+                         'in the Earth. Send city in format like:',
+                'city': 'Tokyo',
+            }
+            return Response(response)
 
-
-        response = requests.get(url, params=payload)
-        print(f"{type(response)=}")
-        if 'error' in response.json():
-            return Response({'finite': 'a la camedie'})
-
-
-
-        response = Response(response.json())
-
-
-        return response
+        except DateNotGiven:
+            response = {
+                'error': '"date" not given. Send date in format like:',
+                'date': "2012-11-22",
+            }
+            return Response(response)
