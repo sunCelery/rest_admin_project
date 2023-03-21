@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'client.apps.ClientConfig',
     'weather_api',
+    'check_memory',
 ]
 
 MIDDLEWARE = [
