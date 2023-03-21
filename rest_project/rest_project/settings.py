@@ -38,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'rest_framework_swagger',
     'rest_framework',
+    'drf_yasg',
+
     'client.apps.ClientConfig',
     'weather_api',
     'check_memory',
@@ -59,7 +62,7 @@ ROOT_URLCONF = 'rest_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -178,6 +181,10 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+# TEMPLATE_DIRS = [
+#     os.path.join(BASE_DIR, 'templates'),
+# ]
 
 AUTH_USER_MODEL = 'client.CustomUser'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

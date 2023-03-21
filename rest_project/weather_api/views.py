@@ -83,7 +83,7 @@ class WeatherAPIView(APIView):
             response = {
                 'error': '"city" not given or there is no such city '
                          'in the Earth. Send city in format like:',
-                'city': 'Tokyo',
+                'city': 'Murom',
             }
             return Response(response)
 
