@@ -3,6 +3,8 @@ from pathlib import Path
 
 import requests
 from django.conf import settings
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework.permissions import AllowAny
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
@@ -56,7 +58,6 @@ def get_date(request: dict) -> dict:
 
     else:
         raise DateNotGiven
-
 
 
 class WeatherAPIView(APIView):
