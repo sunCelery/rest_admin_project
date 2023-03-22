@@ -22,6 +22,7 @@ from .serializer import CustomUserSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
+    permission_classes = (IsOwnerOrReadOnly, )
 
 
 

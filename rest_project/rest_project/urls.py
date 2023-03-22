@@ -51,9 +51,9 @@ urlpatterns = [
     path('api/v1/check_memory/', include('check_memory.urls')),
 
 
-    # path('api/v1/auth/', include('rest_framework.urls')),
-    # path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    # path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/auth/', include('rest_framework.urls')),
+    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 if settings.DEBUG:

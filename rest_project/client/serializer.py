@@ -33,6 +33,7 @@ class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
 
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('profile')
+        # profile_data = validated_data
         profile = instance.profile
 
         instance.email = validated_data.get('email', instance.email)
@@ -40,7 +41,6 @@ class CustomUserSerializer(serializers.HyperlinkedModelSerializer):
 
         profile.sex = profile_data.get('sex', profile.sex)
         profile.birth_date = profile_data.get('birth_date', profile.birth_date)
-        profile.address = profile_data.get('address', profile.address)
         profile.photo = profile_data.get('photo', profile.photo)
         profile.save()
 
