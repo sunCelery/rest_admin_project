@@ -19,4 +19,5 @@ env.bak/
 venv.bak/
 
 # Project specific
-/media
+media/
+uploads/
