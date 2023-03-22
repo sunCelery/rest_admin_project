@@ -44,9 +44,8 @@ urlpatterns = [
     path('api/v1/weather/', include('weather_api.urls')),
     path('api/v1/check-memory/', include('check_memory.urls')),
 
-    path('api/v1/auth/', include('rest_framework.urls')),
-    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/token/', TokenObtainPairView.as_view(), name='log-in'),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='refresh-tokens-pair'),
 ]
 
 if settings.DEBUG:
