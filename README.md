@@ -9,7 +9,7 @@
 
 ## Description ##
 
-**Program allow to perform API different requests**
+**Program allow to perform different API requests**
 
 
 - **/api/v1/users/** - represent end-point for:
@@ -17,16 +17,17 @@
     - list all users
 
 - **/api/v1/users/<pk:int>/** - end-point for:
-    - PATCH user information
+    - PATCH - partly change user information
     - DELETE user
 
 - **/api/v1/token/** - log-in
 
-- **/api/v1/token/refresh/** - getting refresh token
+- **/api/v1/token/refresh/** - get refresh token
 
-- **/api/v1/weather/** - log-in
+- **/api/v1/weather/** - check weather by payload
+    {"city" "city_name", "date": "YYYY-MM-DD"}
 
-- **/api/v1/check-memory/** - log-in
+- **/api/v1/check-memory/** - request memory information from daemon
 
 ## Install ##
 **To install the app run in terminal:**
@@ -36,11 +37,9 @@ docker-compose up
 ```
 
 ## Usage ##
-**To work with API go to the documentation page:**
+**Project usage as a client more visualy shown at documentation page:**
 
 http://localhost:8000/swagger/
-
-At the page all the end-points shown.
 
 ## To Do ##
 
