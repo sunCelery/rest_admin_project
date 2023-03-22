@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from .models import CustomUser, Client
 
-# admin.site.register(Client)
+admin.site.register(Client)
 
 
 class ClientInline(admin.StackedInline):

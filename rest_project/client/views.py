@@ -25,9 +25,22 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = (IsOwnerOrReadOnly, )
 
 
+# class UploadPhot(viewsets.ModelViewSet):
+#     queryset = CustomUser.objects.all()
+#     serializer_class = CustomUserSerializer
+#     permission_classes = (IsOwnerOrReadOnly,)
+#
+#     @detail_route(methods=['post'])
+#     def upload_docs(request):
+#         try:
+#             file = request.data['photo']
+#         except KeyError:
+#             raise ParseError('Request has no resource file attached')
+#         product = Product.objects.create(image=file)
+
 
 # from .serializer import ClientSerializer, RegisterSerializer
-
+#
 #
 # class ClientAPIRegistrationView(generics.CreateAPIView):
 #     queryset = User.objects.all()

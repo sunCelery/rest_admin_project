@@ -39,11 +39,15 @@ class Client(models.Model):
         max_length=1,
         choices=SEX_CHOICES,
         default='U',
-        blank='NULL',
+        blank=True,
         )
-    birth_date = models.DateField(blank=True)
+    birth_date = models.DateField(
+        default="",
+        blank=True,
+    )
     photo = ResizedImageField(
         upload_to='uploads/',
         blank=True,
         size=[600, 600],
+        default='',
     )

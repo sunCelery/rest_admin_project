@@ -1,12 +1,7 @@
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
-from django.views.generic import TemplateView
-from rest_framework.schemas import get_schema_view
-from drf_yasg import openapi
-from drf_yasg.views import get_schema_view
 from rest_framework.permissions import AllowAny
-# from django.views.generic import TemplateView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -32,7 +27,6 @@ schema_view = get_schema_view(
    permission_classes=[AllowAny],
 )
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -48,8 +42,7 @@ urlpatterns = [
 
     path('api/v1/', include('client.urls')),
     path('api/v1/weather/', include('weather_api.urls')),
-    path('api/v1/check_memory/', include('check_memory.urls')),
-
+    path('api/v1/check-memory/', include('check_memory.urls')),
 
     path('api/v1/auth/', include('rest_framework.urls')),
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
