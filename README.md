@@ -9,25 +9,28 @@
 
 ## Description ##
 
-**Program allow to perform different API requests**
+**Program allow to perform different API requests through end-points:**
 
 
-- **/api/v1/users/** - represent end-point for:
-    - creating user
-    - list all users
+- **/api/v1/users/**:
+    - POST - create user
+    - GET - list all users
 
-- **/api/v1/users/<pk:int>/** - end-point for:
+- **/api/v1/users/<pk:int>/**
+    - GET - user details
     - PATCH - partly change user information
-    - DELETE user
+    - DELETE - delete user
 
 - **/api/v1/token/** - log-in
 
-- **/api/v1/token/refresh/** - get refresh token
+- **/api/v1/token/refresh/** - get new access token through refresh token
 
-- **/api/v1/weather/** - check weather by payload
+- **/api/v1/weather/**
+    - GET weather info using payload:
     - {"city": "city_name", "date": "YYYY-MM-DD"}
 
-- **/api/v1/check-memory/** - request memory information from daemon
+- **/api/v1/check-memory/**
+    - GET - request memory information from daemon
 
 ## Install ##
 **To install the app run in terminal:**
