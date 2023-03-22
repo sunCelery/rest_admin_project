@@ -40,9 +40,10 @@ docker-compose up
 ```
 
 ## Usage ##
-**Project usage as a client more visualy shown at documentation page:**
+**Project usage as a client more visualy shown at the documentation page:**
 
 http://localhost:8000/swagger/
+*link available after run docker-compose*
 
 ## To Do ##
 
