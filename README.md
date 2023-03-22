@@ -25,7 +25,7 @@
 - **/api/v1/token/refresh/** - get refresh token
 
 - **/api/v1/weather/** - check weather by payload
-    {"city" "city_name", "date": "YYYY-MM-DD"}
+    - {"city": "city_name", "date": "YYYY-MM-DD"}
 
 - **/api/v1/check-memory/** - request memory information from daemon
 

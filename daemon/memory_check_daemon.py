@@ -4,6 +4,7 @@ from pathlib import Path
 
 import psutil
 
+
 def main():
     while True:
         output_file = open(Path('/tmp/memory_info.txt'), 'w')
