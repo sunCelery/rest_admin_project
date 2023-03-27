@@ -1,3 +1,4 @@
+import json
 import datetime
 from pathlib import Path
 
@@ -10,10 +11,12 @@ class CheckMemoryAPIView(APIView):
     permission_classes = (AllowAny, )
 
     def get(self, request):
-        with open(Path('/tmp/memory_info.txt'), 'r') as f:
+        with open(Path('/tmp/memory_info.json'), 'r') as f:
+            memory_info = json.loads(f.read())
+            print(memory_info)
             response = {
                 "time": datetime.datetime.now(),
-                'memory-info': f.readline()
+                **memory_info,
             }
 
             return Response(response)
