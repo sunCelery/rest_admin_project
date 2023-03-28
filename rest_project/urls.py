@@ -40,9 +40,9 @@ urlpatterns = [
             schema_view.with_ui('redoc', cache_timeout=0),
             name='schema-redoc'),
 
-    path('api/v1/', include('client.urls')),
-    path('api/v1/weather/', include('weather_api.urls')),
-    path('api/v1/check-memory/', include('check_memory.urls')),
+    path('api/v1/', include('apps.client.urls')),
+    path('api/v1/weather/', include('apps.weather_api.urls')),
+    path('api/v1/check-memory/', include('apps.check_memory.urls')),
 
     path('api/v1/token/', TokenObtainPairView.as_view(), name='log-in'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='refresh-tokens-pair'),

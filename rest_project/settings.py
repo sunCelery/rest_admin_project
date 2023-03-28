@@ -47,9 +47,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
 
-    'client.apps.ClientConfig',
-    'weather_api',
-    'check_memory',
+    'apps.weather_api',
+    'apps.check_memory',
+    'apps.client.apps.ClientConfig',
+
 ]
 
 MIDDLEWARE = [

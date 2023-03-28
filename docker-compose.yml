@@ -1,16 +1,12 @@
 version: '3.8'
 services:
-   web:
-       build: .
-       command: python rest_project/manage.py runserver 0.0.0.0:8000
-       ports:
-           - 8000:8000
-       depends_on:
-           - daemon
-           - migration
-   migration:
-       build: .
-       command: python rest_project/manage.py migrate --noinput
-   daemon:
-      build: .
-      command: python daemon/memory_check_daemon.py &
+    web:
+        build: .
+        entrypoint: ["/bin/sh","-c"]
+        command:
+            - |
+               python manage.py migrate --noinput
+               python daemon/memory_check_daemon.py &
+               python manage.py runserver 0.0.0.0:8000
+        ports:
+            - 8000:8000

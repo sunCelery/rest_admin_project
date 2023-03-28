@@ -1,6 +1,7 @@
 from django.apps import AppConfig
+import os
 
 
-class CheckMemoryConfig(AppConfig):
+class ClientConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'check_memory'
+    name = 'apps.client'

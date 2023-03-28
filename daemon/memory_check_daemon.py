@@ -7,7 +7,7 @@ import psutil
 
 def main():
     while True:
-        output_file = open(Path('/tmp/memory_info.json'), 'w')
+        output_file = open('/tmp/memory_info.json', 'w')
         memory_info = psutil.virtual_memory()
         memory_dict = {
             'total': memory_info.total,

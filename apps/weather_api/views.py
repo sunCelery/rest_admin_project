@@ -1,3 +1,4 @@
+import os
 import re
 from pathlib import Path
 
@@ -21,7 +22,10 @@ def get_coordinates(
     """
     if 'city' in request:
         city = request['city']
-        with open(Path('weather_api/data/cities.csv'), newline='') as csv_file:
+        # [os.path.join(BASE_DIR, 'templates'), ]
+        cities_path = os.path.join(settings.BASE_DIR,
+                                   Path('apps/weather_api/data/cities.csv'))
+        with open(cities_path, newline='') as csv_file:
             for _ in range(number_of_cities_in_db):
                 csv_line = csv_file.readline()
                 pattern = r'^' + city + r'.*,'
